@@ -32,4 +32,8 @@ sudo apt install direwolf
 
 ### Decode some packets
 
+```bash
+rtl_fm -M fm -f 144.930M -p 100 -s 48000 - | direwolf-r 48000 -D 1 -B 9600 -
+```
+
 ...
