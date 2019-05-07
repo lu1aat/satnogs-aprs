@@ -33,7 +33,28 @@ sudo apt install direwolf
 ### Decode some packets
 
 ```bash
-rtl_fm -M fm -f 144.930M -p 100 -s 48000 - | direwolf-r 48000 -D 1 -B 9600 -
+rtl_fm -f 144.93M -M fm -s 200000 -r 32000 -p 100 | direwolf -n 1 -r 32000 -b 16 -t 0 -
 ```
 
-...
+###  Lookup SatNOGS scripts and run kill/launch
+
+SatNOGS seems to have to settings called:
+
+* `SATNOGS_PRE_OBSERVATION_SCRIPT`
+* `SATNOGS_POST_OBSERVATION_SCRIPT`
+
+Let's create to `bash` scripts to kill and start `direwolf` in the home directory:
+
+#### direwolf_stop.sh
+
+```bash
+echo "#!/bin/sh
+killall direwolf
+```
+
+#### direwolf_start.sh
+
+```bash
+echo "#!/bin/sh
+rtl_fm -f 144.93M -M fm -s 200000 -r 32000 -p 100 | direwolf -n 1 -r 32000 -b 16 -t 0 - &
+```
